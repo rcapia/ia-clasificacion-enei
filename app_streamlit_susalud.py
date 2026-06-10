@@ -86,20 +86,41 @@ if predict_button:
         probabilities_classes = clf.predict_proba(df_nuevo)[0]
         class_predicted = clf.predict(df_nuevo)[0] # Nos dará 1 o 2 directamente
 
-        # 3. Formatear la respuesta según las clases reales detectadas (Clase 1 y Clase 2)
+        # 3. Formatear la respuesta según el significado real en la gestión de SUSALUD
         if class_predicted == 1:
-            outcome = "Estado de Programación: CLASE 1"
-            probability_final = probabilities_classes[0] # Probabilidad de la clase 1 (Índice 0)
-            style_result = 'background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 15px; border-radius: 5px; font-weight: bold; font-size: larger;'
+            outcome_title = "🟢 ESTABLECIMIENTO CON ACTIVIDAD REGISTRADA (CLASE 1)"
+            outcome_desc = (
+                "El modelo detecta movimiento operativo en el centro de salud. "
+                "Se registran horas programadas, uso de quirófano o incidencias de programación "
+                "que corresponden a un flujo de trabajo hospitalario activo."
+            )
+            probability_final = probabilities_classes[0] # Probabilidad de la clase 1
+            
+            # 4. Mostrar resultado con componentes nativos estéticos de Streamlit
+            st.markdown("### 🎯 Resultado del Análisis:")
+            st.success(f"**{outcome_title}**")
+            
         else:
-            outcome = "Estado de Programación: CLASE 2"
-            probability_final = probabilities_classes[1] # Probabilidad de la clase 2 (Índice 1)
-            style_result = 'background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; padding: 15px; border-radius: 5px; font-weight: bold; font-size: larger;'
+            outcome_title = "🔴 ALERTA: INACTIVIDAD OPERATIVA ABSOLUTA (CLASE 2)"
+            outcome_desc = (
+                "¡Atención! El modelo identifica un escenario de parálisis o falta total de reportes. "
+                "Todas las métricas quirúrgicas, horas efectivas y de programación se encuentran en cero, "
+                "lo que activa el estado de alerta por inactividad."
+            )
+            probability_final = probabilities_classes[1] # Probabilidad de la clase 2
+            
+            # 4. Mostrar resultado con componentes nativos estéticos de Streamlit
+            st.markdown("### 🎯 Resultado del Análisis:")
+            st.error(f"**{outcome_title}**")
 
-        # 4. Mostrar resultado renderizado con HTML personalizado
-        st.markdown("### 🎯 Resultado del Análisis:")
-        result_html = f"<div style='{style_result}'> {outcome} <br><span style='font-size: small; font-weight: normal;'>Confianza del modelo: {round(float(probability_final) * 100, 2)}%</span></div>"
-        st.markdown(result_html, unsafe_allow_html=True)
+        # Explicación del escenario e indicador de confianza visual
+        st.markdown(f"*{outcome_desc}*")
+        
+        # Agrega una métrica visual limpia para la confianza de la Inteligencia Artificial
+        st.metric(
+            label="Nivel de Certeza de la IA", 
+            value=f"{round(float(probability_final) * 100, 2)}%"
+        )
         
     except Exception as e:
         st.error(f"Error interno al procesar la predicción: {e}")
