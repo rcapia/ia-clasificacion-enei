@@ -42,7 +42,7 @@ if 'initialized' not in st.session_state:
 st.set_page_config(page_title="Predicción SUSALUD", page_icon="🏥", layout="centered")
 
 st.title("🏥 Sistema Predictivo de Programación Quirúrgica (SUSALUD) - Clasificación")
-st.markdown("Esta aplicación web utiliza un modelo **Random Forest** masivo para clasificar el estado del indicador **`DE_PROGRAMC`** según la actividad del establecimiento de salud. Herramienta analítica para la evaluación del rendimiento en salas de operaciones. Ingrese los datos de productividad quirúrgica y uso del tiempo para que el modelo identifique de forma inteligente el estado de actividad del establecimiento. El sistema predecirá si el indicador de programación institucional corresponde a un centro de salud operativamente activo (Clase 1) o si se encuentra en situación de alerta por inactividad absoluta (Clase 2).")
+st.markdown("Esta aplicación web utiliza un modelo **Random Forest** masivo para clasificar el estado del indicador **`DE_PROGRAMC`** según la actividad del establecimiento de salud. Esta herramienta analítica es para la evaluación del rendimiento en salas de operaciones. Ingrese los datos de productividad quirúrgica y uso del tiempo para que el modelo identifique de forma inteligente el estado de actividad del establecimiento. El sistema predecirá si el indicador de programación institucional corresponde a un centro de salud operativamente activo (Clase 1) o si se encuentra en situación de alerta por inactividad absoluta (Clase 2).")
 st.markdown("Implemented by Reynaldo Capia Capia")
 st.markdown("---")
 
