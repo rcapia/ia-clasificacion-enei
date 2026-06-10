@@ -10,7 +10,7 @@ import numpy as np
 
 # 01 --------------------------Cargar el Modelo de Susalud---------------------
 # El archivo .joblib creado en el paso anterior de 1.22 MB
-clf = load('C:/Users/rcapia/Downloads/Despliegue-web-ENEI/Implaementando_en_vs_code/clasificacion_susalud/data_consulta_h/modelo_susalud_rf.joblib')
+clf = load('modelo_susalud_rf.joblib')
 
 # 02---------------- Variables globales para los campos del formulario-----------------------
 total_ciruj_may = 0
@@ -43,6 +43,7 @@ st.set_page_config(page_title="Predicción SUSALUD", page_icon="🏥", layout="c
 
 st.title("🏥 Sistema Predictivo de Programación Quirúrgica (SUSALUD)")
 st.markdown("Esta aplicación web utiliza un modelo **Random Forest** masivo para clasificar el estado del indicador **`DE_PROGRAMC`** según la actividad del establecimiento de salud.")
+st.markdown("Implemented by Reynaldo Capia Capia")
 st.markdown("---")
 
 # ------------------------------------ Formulario en dos columnas------------------------------------
